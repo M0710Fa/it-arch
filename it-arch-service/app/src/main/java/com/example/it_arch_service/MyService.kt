@@ -11,7 +11,11 @@ class MyService: Service() {
 
     private val binder = object : IMyAidlInterface.Stub(){
         override fun sum(str: String?): String {
-            return "fdsaf"
+            var cnt = 0
+            if(!str.isNullOrEmpty()) {
+                cnt = str.filter { it.toString() == " " }.count()
+            }
+            return (cnt + 1).toString()
         }
     }
 }

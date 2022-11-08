@@ -11,9 +11,15 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.example.it_arch_client.ui.main.MainScreen
 import com.example.it_arch_client.ui.theme.ItarchclientTheme
 import com.example.it_arch_service.IMyAidlInterface
@@ -26,19 +32,21 @@ class MainActivity : ComponentActivity() {
             ItarchclientTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(8. dp),
                     color = MaterialTheme.colors.background
                 ) {
+
+                    var cnt by remember {
+                        mutableStateOf("0")
+                    }
+
                     MainScreen(
-                        launchService = {
-                            var result = "aaa"
-                            try {
-                                result = iMyAidlInterface?.sum("fd").toString()
-                                Log.i("aaaaaaaaaaaaaaaaaaa", result)
-                            }catch (e: RemoteException){
-                                e.printStackTrace()
-                                result = "Error"
-                            }}
+                        countWords = {
+                            cnt = countWords(it)
+                                        },
+                        words = cnt
                     )
                 }
             }
@@ -70,14 +78,15 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun launchService(){
-        var result = "aaa"
+    private fun countWords(str: String): String{
+        var result = "0"
         try {
-            result = iMyAidlInterface?.sum("fdsa").toString()
+            result = iMyAidlInterface?.sum(str).toString()
             Log.i("aaaaaaaaaaaaaaaaaaa", result)
         }catch (e: RemoteException){
             e.printStackTrace()
             result = "Error"
         }
+        return result
     }
 }
