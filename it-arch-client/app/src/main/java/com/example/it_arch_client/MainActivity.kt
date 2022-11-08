@@ -13,12 +13,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.it_arch_client.ui.main.MainScreen
 import com.example.it_arch_client.ui.theme.ItarchclientTheme
+import com.example.it_arch_service.IMyAidlInterface
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +33,7 @@ class MainActivity : ComponentActivity() {
                         launchService = {
                             var result = "aaa"
                             try {
-                                result = iMyAidlInterface?.sum(1,2).toString()
+                                result = iMyAidlInterface?.sum("fd").toString()
                                 Log.i("aaaaaaaaaaaaaaaaaaa", result)
                             }catch (e: RemoteException){
                                 e.printStackTrace()
@@ -50,7 +48,7 @@ class MainActivity : ComponentActivity() {
     override fun onStart() {
         super.onStart()
         val intent = Intent("MyService")
-        intent.setPackage("com.example.it_arch_service.services")
+        intent.setPackage("com.example.it_arch_service")
         bindService(intent, connection, Context.BIND_AUTO_CREATE)
     }
 
@@ -75,7 +73,7 @@ class MainActivity : ComponentActivity() {
     private fun launchService(){
         var result = "aaa"
         try {
-            result = iMyAidlInterface?.sum(1,2).toString()
+            result = iMyAidlInterface?.sum("fdsa").toString()
             Log.i("aaaaaaaaaaaaaaaaaaa", result)
         }catch (e: RemoteException){
             e.printStackTrace()

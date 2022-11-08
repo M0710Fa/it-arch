@@ -1,12 +1,12 @@
-// MyAidlInterface.aidl
-package com.example.it_arch_service.services;
+// IMyAidlInterface.aidl
+package com.example.it_arch_service;
 
 // Declare any non-default types here with import statements
 
-interface MyAidlInterface{
+interface IMyAidlInterface {
     /**
      * Demonstrates some basic types that you can use as parameters
      * and return values in AIDL.
      */
-    String sum(int a, int b);
+    String sum(String str);
 }
