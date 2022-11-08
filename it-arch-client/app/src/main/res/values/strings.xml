@@ -1,3 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">it-arch-client</string>
+    <string name="header_text">Count Words in a Sentence</string>
+    <string name="button_text">Count!!</string>
+    <string name="counts_unit"> Words</string>
 </resources>

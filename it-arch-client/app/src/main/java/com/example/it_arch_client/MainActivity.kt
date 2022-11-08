@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(8. dp),
+                        .padding(16. dp),
                     color = MaterialTheme.colors.background
                 ) {
 
