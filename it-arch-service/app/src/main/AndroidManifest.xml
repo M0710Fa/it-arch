@@ -27,7 +27,16 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <service android:name=".services.MyService" android:process=":remote" />
+        <service
+            android:name=".services.MyService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="MyService"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
