@@ -13,9 +13,9 @@ class MyService: Service() {
         override fun sum(str: String?): String {
             var cnt = 0
             if(!str.isNullOrEmpty()) {
-                cnt = str.filter { it.toString() == " " }.count()
+                cnt = str.filter { it.toString() == " " }.count() + 1
             }
-            return (cnt + 1).toString()
+            return cnt.toString()
         }
     }
 }
