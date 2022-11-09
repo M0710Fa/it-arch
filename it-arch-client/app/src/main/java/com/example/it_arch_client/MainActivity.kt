@@ -55,9 +55,11 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        val intent = Intent("MyService")
-        intent.setPackage("com.example.it_arch_service")
-        bindService(intent, connection, Context.BIND_AUTO_CREATE)
+        if(iMyAidlInterface == null){
+            val intent = Intent("MyService")
+            intent.setPackage("com.example.it_arch_service")
+            bindService(intent, connection, Context.BIND_AUTO_CREATE)
+        }
     }
 
     override fun onDestroy() {
