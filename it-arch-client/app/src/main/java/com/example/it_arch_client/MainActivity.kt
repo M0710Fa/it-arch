@@ -25,6 +25,10 @@ import com.example.it_arch_client.ui.theme.ItarchclientTheme
 import com.example.it_arch_service.IMyAidlInterface
 
 class MainActivity : ComponentActivity() {
+    companion object{
+        const val TAG = "ClientApp"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -55,9 +59,11 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        val intent = Intent("MyService")
-        intent.setPackage("com.example.it_arch_service")
-        bindService(intent, connection, Context.BIND_AUTO_CREATE)
+        if(iMyAidlInterface == null){
+            val intent = Intent("MyService")
+            intent.setPackage("com.example.it_arch_service")
+            bindService(intent, connection, Context.BIND_AUTO_CREATE)
+        }
     }
 
     override fun onDestroy() {
@@ -73,16 +79,16 @@ class MainActivity : ComponentActivity() {
         }
 
         override fun onServiceDisconnected(className: ComponentName) {
-            Log.e("ClientApplication", "サービスに接続できませんでした")
+            Log.e(TAG, "サービスに接続できませんでした")
             iMyAidlInterface   = null
         }
     }
 
     private fun countWords(str: String): String{
-        var result = "0"
+        var result: String
         try {
             result = iMyAidlInterface?.sum(str).toString()
-            Log.i("aaaaaaaaaaaaaaaaaaa", result)
+            Log.i(TAG, result)
         }catch (e: RemoteException){
             e.printStackTrace()
             result = "Error"
